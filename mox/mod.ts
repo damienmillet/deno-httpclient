@@ -3,29 +3,22 @@
  * @description Time service
  * @version 1.0.0
  */
-class Mox {
-  declare today: number; // today timestamp
-  declare date: Date; // actual date object
-  declare yesterday: number; // yesterday timestamp
-  declare tomorrow: number; // tomorrow Timestamp
+export class Mox {
+  static date = new Date();
+  static today = new Date().setHours(0, 0, 0, 0) / 1000;
+  static yesterday: number = this.today - 86400;
+  static tomorrow: number = this.today + 86400;
   declare timer: number; // timer
 
-  get now(): number {
+  static get now(): number {
     return Math.floor(Date.now() / 1000);
-  }
-
-  constructor() {
-    this.date = new Date();
-    this.today = new Date().setHours(0, 0, 0, 0) / 1000;
-    this.yesterday = this.today - 86400;
-    this.tomorrow = this.today + 86400;
   }
 
   /**
    * Get current timestamp with 10 digits
    * @returns {number} Timestamp
    */
-  formatStamp(t: number): number {
+  static formatStamp(t: number): number {
     while (t >= 10000000000) t /= 10;
     return Math.floor(t);
   }
@@ -39,7 +32,7 @@ class Mox {
 
   // stop() { clearInterval(this._timer); }
 
-  isYesterday(date: Date | string | number): boolean {
+  static isYesterday(date: Date | string | number): boolean {
     if (typeof date === 'string') {
       date = parseInt(date) ?? new Date(date).getTime();
     }
@@ -63,7 +56,7 @@ class Mox {
    * Formatted  date with format YYYY-MM-DD
    * @returns {string}
    */
-  getformattedDate(): string {
+  static getformattedDate(): string {
     return `${this.date.getFullYear()}-${this.date.getMonth() + 1
       }-${this.date.getDate()}`;
   }
@@ -72,7 +65,7 @@ class Mox {
    * Formatted time with format HH:MM:SS
    * @returns {string}
    */
-  getFormattedTime(): string {
+  static getFormattedTime(): string {
     const hours = this.date.getHours();
     const minutes = this.date.getMinutes();
     const seconds = this.date.getSeconds();
@@ -83,9 +76,7 @@ class Mox {
    * Formatted date and time with format YYYY-MM-DD HH:MM:SS
    * @returns {string}
    */
-  getFormattedDateTime(): string {
+  static getFormattedDateTime(): string {
     return `${this.getformattedDate()} ${this.getFormattedTime()}`;
   }
 }
-
-export default new Mox();
