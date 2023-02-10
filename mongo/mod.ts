@@ -1,5 +1,4 @@
-import { MongoClient } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
-import 'https://deno.land/std@0.167.0/dotenv/load.ts';
+import { MongoClient } from "./deps.ts";
 
 if (!Deno.env.get('MONGO_DB_HOST')) { throw new Error('MONGO_DB_HOST is not defined'); }
 if (!Deno.env.get('MONGO_DB_NAME')) { throw new Error('MONGO_DB_NAME is not defined'); }
@@ -28,4 +27,4 @@ await client.connect({
   },
 });
 
-export default client;
+export { client };
