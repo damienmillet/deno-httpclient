@@ -1,4 +1,4 @@
-import Mox from '../mox/mod.ts';
+import { Mox } from './deps.ts';
 
 type sendMessage<T = Record<never, never>> = {
   name: string;
