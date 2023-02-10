@@ -8,9 +8,9 @@ if (!Deno.env.get('MONGO_PASSWORD')) { throw new Error('MONGO_PASSWORD is not de
 const dbHost = Deno.env.get('MONGO_DB_HOST');
 const dbName = Deno.env.get('MONGO_DB_NAME');
 
-const client: MongoClient = new MongoClient();
+const Mongo: MongoClient = new MongoClient();
 
-await client.connect({
+await Mongo.connect({
   db: dbName as string,
   tls: false,
   servers: [
@@ -27,4 +27,4 @@ await client.connect({
   },
 });
 
-export { client };
+export { Mongo };

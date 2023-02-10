@@ -28,7 +28,7 @@ export type message<MSG = Record<never, never>> = {
  * @returns {WsClient}
  * @requires [WebSocket,Mox]
  */
-export default abstract class WsClient {
+export abstract class Ws {
   declare core: WebSocket;
   declare authenticated: boolean;
   declare msg: MessageEvent;
