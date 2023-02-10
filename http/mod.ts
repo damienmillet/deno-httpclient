@@ -1,4 +1,4 @@
-abstract class Http {
+export abstract class Http {
   declare url: string;
   declare headers: Headers;
   declare token: string;
@@ -82,5 +82,3 @@ abstract class Http {
     options: RequestInit,
   ): Promise<T>;
 }
-
-export { Http };

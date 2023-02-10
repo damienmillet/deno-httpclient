@@ -3,7 +3,7 @@
  * @description Time service
  * @version 1.0.0
  */
-class Mox {
+export class Mox {
   static date = new Date();
   static today = new Date().setHours(0, 0, 0, 0) / 1000;
   static yesterday: number = this.today - 86400;
@@ -80,5 +80,3 @@ class Mox {
     return `${this.getformattedDate()} ${this.getFormattedTime()}`;
   }
 }
-
-export { Mox }
