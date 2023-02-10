@@ -1,4 +1,4 @@
-export default abstract class HttpClient {
+export abstract class Http {
   declare url: string;
   declare headers: Headers;
   declare token: string;
