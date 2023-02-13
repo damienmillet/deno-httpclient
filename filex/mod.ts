@@ -1,4 +1,4 @@
-export const File = {
+export const Filex = {
   existFolder: (folder: string) => {
     try {
       Deno.readDirSync(folder);
