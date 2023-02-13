@@ -1,6 +1,6 @@
 import "./deps.ts";
 
-export const Debug = {
+export const debug = {
   on: (): boolean => Deno.env.get('DEBUG')?.toLowerCase() === 'true',
-  off: (): boolean => !Debug.on(),
+  off: (): boolean => Deno.env.get('DEBUG')?.toLowerCase() === 'false',
 }
