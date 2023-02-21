@@ -1,4 +1,4 @@
-import { MongoClient } from "./deps.ts";
+import { MongoClient, ObjectId } from "./deps.ts";
 
 if (!Deno.env.get('MONGO_DB_HOST')) { throw new Error('MONGO_DB_HOST is not defined'); }
 if (!Deno.env.get('MONGO_DB_NAME')) { throw new Error('MONGO_DB_NAME is not defined'); }
@@ -27,4 +27,4 @@ await Mongo.connect({
   },
 });
 
-export { Mongo };
+export { Mongo, ObjectId };
