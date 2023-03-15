@@ -8,8 +8,30 @@ export const removeLongerThan = (items: item[], len: number) => {
   return items;
 };
 
-export const findByIndex = (items: item[], index: number): item | undefined =>
+/**
+ * Get item by index
+ */
+export const getByIndex = (items: item[], index: number): item | undefined =>
   items[index];
+
+export const getLast = (items: item[]): item => items[items.length - 1];
+
+export const getFirst = (items: item[]): item => items[0];
+
+/**
+ * Get item by a search
+ */
+export const findByIndex = (items: item[], index: number): item | undefined => {
+  return items.find((i) => i.index === index);
+}
+
+export const findFirst = (items: item[]): item | undefined => {
+  return items.findIndex((i) => i.index === 0);
+}
+
+export const findLast = (items: item[]): item | undefined => {
+  return items.findIndex((i) => i.index === items.length - 1);
+}
 
 export const findIndexById = (items: item[], id: number | string): number =>
   items.findIndex((i) => i.id === id);
@@ -21,14 +43,6 @@ export const findById = (
   items: item[],
   id: number | string,
 ): item | undefined => items.find((b) => b.id === id);
-
-export const findByName = (items: item[], name: string): item | undefined =>
-  items.find((b) => b.name === name);
-
-export const findByType = (
-  items: item[],
-  type: number | string,
-): item | undefined => items.find((b) => b.type === type);
 
 export const remove = (items: item[], index: number) => {
   if (index === 0) items.shift();
@@ -90,13 +104,6 @@ export const findIndex = (
   );
 };
 
-export const findLast = (items: item[]): item => {
-  return items[items.length - 1];
-};
-
-export const findFirst = (items: item[]): item => {
-  return items[0];
-};
 
 export const sortById = (items: item[]) => {
   return items.sort((a, b) => a.id - b.id);
@@ -107,6 +114,6 @@ export const sortByReverseId = (items: item[]) => {
   return items.sort((a, b) => b.id - a.id);
 };
 
-export const byReverseIndex = (items: item[], index: number) => {
+export const getByReverseIndex = (items: item[], index: number) => {
   return items[items.length - 1 - index];
 };

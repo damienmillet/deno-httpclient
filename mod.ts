@@ -24,5 +24,26 @@ export {
   lowerOrEqual,
 } from "./compare/mod.ts";
 export { } from "./compare/mod.ts";
-export { } from "./array/mod.ts";
+export {
+  removeLongerThan,
+  getByIndex,
+  getLast,
+  getFirst,
+  findIndexById,
+  findIndexByName,
+  findByIndex,
+  findById,
+  remove,
+  removeOne,
+  add,
+  addAll,
+  find,
+  findIndex,
+  findFirst,
+  findLast,
+  sortById,
+  sortByReverseId,
+  getByReverseIndex
+
+} from "./array/mod.ts";
 export { } from "./statistic/mod.ts";
