@@ -23,7 +23,6 @@ export {
   upperOrEqual,
   lowerOrEqual,
 } from "./compare/mod.ts";
-export { } from "./compare/mod.ts";
 export {
   removeLongerThan,
   getByIndex,
@@ -46,4 +45,14 @@ export {
   getByReverseIndex
 
 } from "./array/mod.ts";
-export { } from "./statistic/mod.ts";
+export {
+  minNeededByDay,
+  minNeededByHour,
+  minNeededByMinute,
+  minNeededByMonth,
+  average,
+  sum,
+  min,
+  max,
+  median,
+} from "./statistic/mod.ts";
