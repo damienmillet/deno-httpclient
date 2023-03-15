@@ -6,7 +6,7 @@ export type http = {
   fetch(url: string, options: RequestInit): Promise<Response>;
 };
 
-const Http: http = {
+export const Http: http = {
   headers: new Headers({ "Content-Type": "application/json" }),
   async fetchJson<T>(url: string, options: RequestInit) {
     await this.fetch(url, options);
@@ -18,5 +18,3 @@ const Http: http = {
     return this.response;
   },
 };
-
-export default Http;
