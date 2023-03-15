@@ -5,3 +5,13 @@ export { File } from "./file/mod.ts";
 export { type http, Http } from "./http/mod.ts";
 export { Ws } from "./ws/mod.ts";
 export { Mongo } from "./mongo/mod.ts";
+export {
+  upper,
+  same,
+  equal,
+  lower,
+  upperOrSame,
+  lowerOrSame,
+  upperOrEqual,
+  lowerOrEqual,
+} from "./compare/mod.ts";
