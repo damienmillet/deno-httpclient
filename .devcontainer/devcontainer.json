@@ -23,7 +23,8 @@
 				"denoland.vscode-deno",
 				"GitHub.copilot",
 				"seatonjiang.gitmoji-vscode",
-				"benjaminadk.emojis4git"
+				"benjaminadk.emojis4git",
+				"GitHub.vscode-pull-request-github"
 			]
 		}
 	},

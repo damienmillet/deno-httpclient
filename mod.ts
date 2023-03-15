@@ -23,3 +23,6 @@ export {
   upperOrEqual,
   lowerOrEqual,
 } from "./compare/mod.ts";
+export { } from "./compare/mod.ts";
+export { } from "./array/mod.ts";
+export { } from "./statistic/mod.ts";
