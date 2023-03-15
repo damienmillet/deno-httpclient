@@ -21,7 +21,9 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"denoland.vscode-deno",
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"seatonjiang.gitmoji-vscode",
+				"benjaminadk.emojis4git"
 			]
 		}
 	},
