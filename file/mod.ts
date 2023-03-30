@@ -1,16 +1,30 @@
 
-export const existFolder = (folder: string) => {
+export function existFolder(folder: string): boolean {
   try {
-    Deno.readDirSync(folder);
-  } catch (_error) {
+    const stats = Deno.statSync(folder);
+    return stats.isDirectory;
+  } catch {
+    return false;
+  }
+}
+
+export function mustExistFolder(folder: string) {
+  if (!existFolder(folder)) {
     Deno.mkdirSync(folder);
   }
 }
 
-export const existFile = (file: string) => {
+export function existFile(file: string) {
   try {
-    return Deno.readFileSync(file);
-  } catch (_error) {
-    Deno.writeFileSync(file, new Uint8Array());
+    const stats = Deno.statSync(file);
+    return stats.isFile;
+  } catch {
+    return false;
+  }
+}
+
+export function mustExistFile(file: string) {
+  if (!existFile(file)) {
+    Deno.writeTextFileSync(file, "");
   }
 }

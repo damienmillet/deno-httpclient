@@ -24,7 +24,9 @@
 				"GitHub.copilot",
 				"seatonjiang.gitmoji-vscode",
 				"benjaminadk.emojis4git",
-				"GitHub.vscode-pull-request-github"
+				"GitHub.vscode-pull-request-github",
+				"fabiospampinato.vscode-github-notifications-bell",
+				"GitHub.copilot-labs"
 			]
 		}
 	},
