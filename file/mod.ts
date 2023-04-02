@@ -27,4 +27,5 @@ export function mustExistFile(file: string) {
   if (!existFile(file)) {
     Deno.writeTextFileSync(file, "");
   }
+  return existFile(file);
 }

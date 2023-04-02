@@ -1,4 +1,4 @@
-export const upper = (a: number, b: number) => a > b;
+export const upper = (a: number, b: number) => a > b
 export const same = (a: unknown, b: unknown) => a === b;
 export const equal = (a: number, b: number) => a === b;
 export const lower = (a: number, b: number) => a < b;
