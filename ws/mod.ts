@@ -45,7 +45,7 @@ export type ws = {
   getLastMessage: <T>() => message<T>;
   duplicateMessage: () => boolean;
   send: (message: sendMessage) => void;
-  open: (url: string) => void;
+  open: (url: string) => Promise<Event>;
   close: () => void;
   restart: () => void;
   message: (msg: sendMsg) => void;
@@ -79,16 +79,25 @@ export const Ws: ws = {
   getLastMessage: function <T>(): message<T> {
     return this.lastMessage as message<T>;
   },
-  open(url: string) {
-    this.url = url;
-    this.core = new WebSocket(url);
-    this.requestId = 0;
-    this.subscribeId = 0;
-    this.core.onopen = (ev: Event) => this.onOpen(ev);
-    this.core.onmessage = (ev: MessageEvent) => this.onMessage(ev);
-    this.core.onclose = (ev: CloseEvent) => this.onClose(ev);
-    this.core.onerror = (ev: Event) => this.onError(ev);
+  open(url: string): Promise<Event> {
+    return new Promise((resolve, reject) => {
+      this.url = url;
+      this.core = new WebSocket(url);
+      this.requestId = 0;
+      this.subscribeId = 0;
+      this.core.onopen = (ev: Event) => { this.onOpen(ev); return resolve(ev) };
+      this.core.onmessage = (ev: MessageEvent) => this.onMessage(ev);
+      this.core.onclose = (ev: CloseEvent) => this.onClose(ev);
+      this.core.onerror = (ev: Event) => { this.onError(ev); return reject(ev) };
+      setTimeout(() => {
+        if (!this.connected) {
+          this.core.close();
+          return reject(new Error("Connection timeout"));
+        }
+      }, 5000);
+    })
   },
+
   close() {
     this.core.close();
   },
