@@ -164,13 +164,13 @@
 //   },
 // };
 
-export abstract class WsClient extends WebSocket {
+export class WsClient extends WebSocket {
   declare requestId: number;
   declare subscribeId: number;
   declare serverTimestamp: number;
   declare lastMessageEvent: MessageEvent;
   declare lastJsonMessage: Record<never, never>;
-  abstract callback: () => void;
+  declare callback: () => void;
 
   get connected() {
     return this.readyState === this.OPEN;
@@ -224,7 +224,7 @@ export abstract class WsClient extends WebSocket {
   onOpen(_ev: Event) {
     // this.init();
     console.log(
-      `ws connected at ${new Date().toLocaleString(undefined, { hour12: false })
+      `ws connected to ${this.url} at ${new Date().toLocaleString(undefined, { hour12: false })
       }`,
     );
     console.log("Ready...");
@@ -237,7 +237,20 @@ export abstract class WsClient extends WebSocket {
   }
   onMessage(ev: MessageEvent) {
     this.lastMessageEvent = ev;
-    this.lastJsonMessage = JSON.parse(ev.data);
+    // check if can parse to json
+    this.lastJsonMessage = !ev.data.startsWith("{") ? ev.data : JSON.parse(ev.data);
     this.callback()
+  }
+  // string | ArrayBufferLike | Blob | ArrayBufferView
+  send(data: Record<never, never>): void {
+    if (this.connected) {
+      if (typeof data === "object") {
+        data = JSON.stringify(data)
+      }
+      return super.send(data as string | ArrayBufferLike | Blob | ArrayBufferView);
+    }
+    else {
+      console.log("ws not connected");
+    }
   }
 }
