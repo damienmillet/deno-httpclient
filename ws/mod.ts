@@ -53,12 +53,13 @@
 export class WsClient extends WebSocket {
   declare requestId: number;
   declare subscribeId: number;
-  declare subscribed: Record<never, never>[];
   declare serverTimestamp: number;
   declare lastMessageEvent: MessageEvent;
   declare lastJsonMessage: Record<never, never>;
-  declare sendedMessages: Record<never, never>[];
   declare receive: () => void;
+  sendedMessages: Record<never, never>[] = [];
+  receivedMessages: Record<never, never>[] = [];
+  subscribed: Record<never, never>[] = [];
 
   get connected() {
     return this.readyState === this.OPEN;
@@ -125,8 +126,8 @@ export class WsClient extends WebSocket {
   }
   onMessage(ev: MessageEvent) {
     this.lastMessageEvent = ev;
-    // check if can parse to json
     this.lastJsonMessage = !ev.data.startsWith("{") ? ev.data : JSON.parse(ev.data);
+    this.receivedMessages.push(this.lastJsonMessage);
     this.receive()
   }
   // string | ArrayBufferLike | Blob | ArrayBufferView
