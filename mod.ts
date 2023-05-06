@@ -6,5 +6,5 @@ export * from "./http/mod.ts";
 export * from "./ws/mod.ts";
 export * from "./mongo/mod.ts";
 export * from "./compare/mod.ts";
-export * from "./array/mod.ts";
+export * from "./list/mod.ts";
 export * from "./statistic/mod.ts";

@@ -13,7 +13,7 @@ import * as mod from "./mod.ts";
 
 const ws = new mod.WsClient("wss://ws.postman-echo.com/raw");
 
-ws.callback = () => {
+ws.receive = () => {
   console.log(ws.lastMessage);
 }
 
