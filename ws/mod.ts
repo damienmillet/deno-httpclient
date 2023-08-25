@@ -50,6 +50,10 @@
 //   },
 // };
 
+/**
+ * WebSocket client
+ * @version 1.0.0
+ */
 export class WsClient extends WebSocket {
   declare requestId: number;
   declare subscribeId: number;

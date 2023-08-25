@@ -1,31 +1,24 @@
-import { MongoBase } from "./deps.ts";
+import { MongoClient } from "https://deno.land/x/mongo@v0.31.2/mod.ts";
+import "https://deno.land/std@0.190.0/dotenv/load.ts";
 
+const simpleClient = new MongoClient();
 
-if (!Deno.env.get('MONGO_DB_HOST')) { throw new Error('MONGO_DB_HOST is not defined'); }
-if (!Deno.env.get('MONGO_DB_NAME')) { throw new Error('MONGO_DB_NAME is not defined'); }
-if (!Deno.env.get('MONGO_USER')) { throw new Error('MONGO_USER is not defined'); }
-if (!Deno.env.get('MONGO_PASSWORD')) { throw new Error('MONGO_PASSWORD is not defined'); }
+if (
+  !Deno.env.get("MONGO_DB_NAME") || !Deno.env.get("MONGO_DB_HOST") ||
+  !Deno.env.get("MONGO_DB_USER") || !Deno.env.get("MONGO_DB_PASSWORD")
+) {
+  throw new Error(
+    "Please define MONGO_DB_NAME, MONGO_DB_HOST, MONGO_DB_USER and MONGO_DB_PASSWORD in your .env file",
+  );
+}
 
-const dbHost = Deno.env.get('MONGO_DB_HOST');
-const dbName = Deno.env.get('MONGO_DB_NAME');
+const bdd = Deno.env.get("MONGO_DB_NAME");
+const host = Deno.env.get("MONGO_DB_HOST");
+const user = Deno.env.get("MONGO_DB_USER");
+const password = Deno.env.get("MONGO_DB_PASSWORD");
 
-export const Mongo: MongoBase.MongoClient = new MongoBase.MongoClient();
+const url = `mongodb://${user}:${password}@${host}:27017/?authSource=${bdd}`;
 
-await Mongo.connect({
-  db: dbName as string,
-  tls: false,
-  servers: [
-    {
-      host: dbHost as string,
-      port: 27017,
-    },
-  ],
-  credential: {
-    username: Deno.env.get('MONGO_USER'),
-    password: Deno.env.get('MONGO_PASSWORD'),
-    db: dbName,
-    mechanism: "SCRAM-SHA-1",
-  },
-});
+await simpleClient.connect(url);
 
-export default MongoBase;
+export default simpleClient;
